@@ -38,8 +38,11 @@ instance.interceptors.response.use(
 export default instance
 export const sendRequest = (url, data = {}, options = {}) => {
   return new Promise((resolve, reject) => {
-    instance
-      .post(url, data, options)
+    instance({
+      url,
+      data,
+      ...config
+    })
       .then(res => {
         if (res.status === 1) {
           resolve(res.data)
